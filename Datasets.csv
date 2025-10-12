@@ -1,0 +1,31 @@
+UID,Drug_Name,Condition,Rating,Review
+1001,Aspirin,Headache,5,Effective pain relief
+1002,Ibuprofen,Pain,8,Strong side effects
+1003,Paracetamol,Fever,4,Mild relief
+1004,Amoxicillin,Infection,9,Severe allergic reaction
+1005,Metformin,Diabetes,6,Moderate side effects
+1006,Lisinopril,Hypertension,7,Some dizziness
+1007,Atorvastatin,Cholesterol,8,Muscle pain
+1008,Omeprazole,Acid Reflux,5,Works well
+1009,Levothyroxine,Thyroid,6,Minor effects
+1010,Amlodipine,Blood Pressure,9,Strong side effects
+1011,Simvastatin,Cholesterol,8,Muscle weakness
+1012,Losartan,Hypertension,7,Moderate effects
+1013,Gabapentin,Nerve Pain,9,Severe dizziness
+1014,Hydrochlorothiazide,Edema,6,Mild effects
+1015,Sertraline,Depression,8,Nausea and headache
+1016,Albuterol,Asthma,5,Effective
+1017,Montelukast,Allergies,7,Some drowsiness
+1018,Escitalopram,Anxiety,8,Sleep issues
+1019,Carvedilol,Heart Failure,9,Fatigue
+1020,Furosemide,Fluid Retention,7,Dehydration
+1021,Pantoprazole,GERD,6,Works fine
+1022,Clopidogrel,Blood Clots,8,Bleeding risk
+1023,Rosuvastatin,High Cholesterol,9,Severe muscle pain
+1024,Warfarin,Anticoagulant,10,High bleeding risk
+1025,Insulin,Diabetes,7,Hypoglycemia
+1026,Prednisone,Inflammation,9,Weight gain
+1027,Tramadol,Pain,8,Dizziness
+1028,Ciprofloxacin,UTI,7,Tendon problems
+1029,Azithromycin,Bacterial Infection,6,Stomach upset
+1030,Clonazepam,Anxiety,8,Drowsiness

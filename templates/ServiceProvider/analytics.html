@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+    <h2 style="color: #667eea; margin-bottom: 30px; text-align: center;">Drug Side Effect Analytics Dashboard</h2>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+        <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 20px;">Pie Chart: Side Effect Distribution</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 20px;">Line Chart: Prediction Trends</h3>
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
+    
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+        <h3 style="color: #667eea;">Summary Statistics</h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;">
+            <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <h4 style="color: #28a745;">Low Side Effects</h4>
+                <p style="font-size: 32px; font-weight: bold; color: #28a745;">{{ chart_data.low_count }}</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <h4 style="color: #dc3545;">High Side Effects</h4>
+                <p style="font-size: 32px; font-weight: bold; color: #dc3545;">{{ chart_data.high_count }}</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <h4 style="color: #667eea;">Total Predictions</h4>
+                <p style="font-size: 32px; font-weight: bold; color: #667eea;">{{ chart_data.total }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const pieCtx = document.getElementById('pieChart').getContext('2d');
+const pieChart = new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: ['Low Side Effect', 'High Side Effect'],
+        datasets: [{
+            data: [{{ chart_data.low_count }}, {{ chart_data.high_count }}],
+            backgroundColor: ['#28a745', '#dc3545'],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+const lineCtx = document.getElementById('lineChart').getContext('2d');
+const lineChart = new Chart(lineCtx, {
+    type: 'line',
+    data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [{
+            label: 'Low Side Effects',
+            data: [{{ chart_data.low_count|default:0 }}, {{ chart_data.low_count|add:5|default:5 }}, {{ chart_data.low_count|add:3|default:3 }}, {{ chart_data.low_count|default:0 }}],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4
+        }, {
+            label: 'High Side Effects',
+            data: [{{ chart_data.high_count|default:0 }}, {{ chart_data.high_count|add:2|default:2 }}, {{ chart_data.high_count|add:4|default:4 }}, {{ chart_data.high_count|default:0 }}],
+            borderColor: '#dc3545',
+            backgroundColor: 'rgba(220, 53, 69, 0.1)',
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <h2 style="color: #667eea; margin-bottom: 30px; text-align: center;">User Profile</h2>
+    
+    <div style="background: #f8f9fa; padding: 30px; border-radius: 10px;">
+        <table style="width: 100%; border: none;">
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold; width: 200px;">Username:</td>
+                <td style="border: none; padding: 15px;">{{ object.username }}</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold;">Email:</td>
+                <td style="border: none; padding: 15px;">{{ object.email }}</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold;">Phone Number:</td>
+                <td style="border: none; padding: 15px;">{{ object.phoneno }}</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold;">Gender:</td>
+                <td style="border: none; padding: 15px;">{{ object.gender }}</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold;">Country:</td>
+                <td style="border: none; padding: 15px;">{{ object.country }}</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold;">State:</td>
+                <td style="border: none; padding: 15px;">{{ object.state }}</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold;">City:</td>
+                <td style="border: none; padding: 15px;">{{ object.city }}</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 15px; font-weight: bold;">Address:</td>
+                <td style="border: none; padding: 15px;">{{ object.address }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="{% url 'Predict_Drug_Side_Effect_Type' %}" class="btn" style="text-decoration: none; display: inline-block;">Make Prediction</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 0;">
+    <h1 style="color: #667eea; margin-bottom: 20px;">Welcome to DeepSide</h1>
+    <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+        A Deep Learning Framework for Drug Side Effect Prediction
+    </p>
+    
+    <div style="background: #f8f9fa; padding: 30px; border-radius: 10px; margin: 30px 0;">
+        <h2 style="color: #333; margin-bottom: 20px;">About DeepSide</h2>
+        <p style="color: #666; line-height: 1.8;">
+            DeepSide uses advanced deep learning techniques including Multi-modal Neural Networks (MMNN), 
+            Support Vector Machines (SVM), and Logistic Regression to predict drug side effects. 
+            Our system helps researchers identify dangerous side effects early, improving drug safety 
+            and saving development costs.
+        </p>
+    </div>
+    
+    <div style="margin-top: 40px;">
+        <a href="{% url 'Register1' %}" class="btn" style="margin: 10px; text-decoration: none; display: inline-block;">Get Started - Register</a>
+        <a href="{% url 'login' %}" class="btn" style="margin: 10px; text-decoration: none; display: inline-block; background: #764ba2;">Login</a>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 50px;">
+        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #667eea;">🧬 MMNN Model</h3>
+            <p style="color: #666;">Multi-modal Neural Networks for accurate predictions</p>
+        </div>
+        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #667eea;">🔬 ML Ensemble</h3>
+            <p style="color: #666;">Combines SVM, Logistic Regression & Neural Networks</p>
+        </div>
+        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #667eea;">📊 Visualization</h3>
+            <p style="color: #666;">Interactive charts and prediction analysis</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

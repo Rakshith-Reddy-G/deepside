@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <h2 style="color: #667eea; margin-bottom: 30px; text-align: center;">Drug Side Effect Prediction</h2>
+    
+    <form method="POST" action="{% url 'Predict_Drug_Side_Effect_Type' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="uid">Drug UID *</label>
+            <input type="text" id="uid" name="uid" placeholder="Enter Drug UID (e.g., 1001)" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="Drug_Name">Drug Name *</label>
+            <input type="text" id="Drug_Name" name="Drug_Name" placeholder="Enter Drug Name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="Condition1">Medical Condition *</label>
+            <input type="text" id="Condition1" name="Condition1" placeholder="Enter Medical Condition" required>
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%;">Predict Side Effects</button>
+    </form>
+    
+    {% if objs %}
+    <div class="result-box" style="margin-top: 30px;">
+        <h3>Prediction Result:</h3>
+        <p style="font-size: 20px; color: {% if 'Low' in objs %}#28a745{% else %}#dc3545{% endif %}; font-weight: bold; margin-top: 15px;">
+            {{ objs }}
+        </p>
+        <p style="margin-top: 15px; color: #666;">
+            {% if 'Low' in objs %}
+                This drug shows a low risk of side effects based on our deep learning model analysis.
+            {% else %}
+                This drug shows a high risk of side effects. Further testing and monitoring is recommended.
+            {% endif %}
+        </p>
+    </div>
+    {% endif %}
+    
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="{% url 'prediction_history' %}" class="btn" style="text-decoration: none; display: inline-block; background: #764ba2;">View Prediction History</a>
+    </div>
+</div>
+{% endblock %}

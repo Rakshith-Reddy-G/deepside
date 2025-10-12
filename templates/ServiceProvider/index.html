@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 0;">
+    <h1 style="color: #667eea; margin-bottom: 20px;">Service Provider Dashboard</h1>
+    <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+        Welcome to the DeepSide Analytics and Management Portal
+    </p>
+    
+    <div style="background: #f8f9fa; padding: 30px; border-radius: 10px; margin: 30px 0;">
+        <h2 style="color: #333; margin-bottom: 20px;">Available Features</h2>
+        <p style="color: #666; line-height: 1.8;">
+            Access comprehensive analytics and visualizations of drug side effect predictions.
+            Monitor trends, view statistics, and analyze prediction patterns.
+        </p>
+    </div>
+    
+    <div style="margin-top: 40px;">
+        <a href="{% url 'service_provider:analytics' %}" class="btn" style="margin: 10px; text-decoration: none; display: inline-block;">View Analytics Dashboard</a>
+    </div>
+</div>
+{% endblock %}

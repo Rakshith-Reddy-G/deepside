@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h2 style="color: #667eea; margin-bottom: 30px; text-align: center;">Prediction History</h2>
+    
+    {% if predictions %}
+    <table>
+        <thead>
+            <tr>
+                <th>Drug UID</th>
+                <th>Drug Name</th>
+                <th>Condition</th>
+                <th>Prediction</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pred in predictions %}
+            <tr>
+                <td>{{ pred.uid }}</td>
+                <td>{{ pred.Drug_Name }}</td>
+                <td>{{ pred.Condition1 }}</td>
+                <td style="color: {% if 'Low' in pred.Prediction %}#28a745{% else %}#dc3545{% endif %}; font-weight: bold;">
+                    {{ pred.Prediction }}
+                </td>
+                <td>{{ pred.date_time|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="result-box" style="text-align: center;">
+        <p>No predictions found. Make your first prediction now!</p>
+        <a href="{% url 'Predict_Drug_Side_Effect_Type' %}" class="btn" style="text-decoration: none; display: inline-block; margin-top: 20px;">Make Prediction</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
