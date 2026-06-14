@@ -60,62 +60,19 @@ def Predict_Drug_Side_Effect_Type(request):
         return redirect('login')
     
     if request.method == "POST":
-        import pandas as pd
-        from sklearn.feature_extraction.text import CountVectorizer
-        from sklearn.ensemble import VotingClassifier
-        from sklearn.model_selection import train_test_split
-        from sklearn.neural_network import MLPClassifier
-        from sklearn import svm
-        from sklearn.linear_model import LogisticRegression
+        from ml.inference import predict_side_effect
         
         uid = request.POST.get('uid')
         Drug_Name = request.POST.get('Drug_Name')
         Condition1 = request.POST.get('Condition1')
         
         try:
-            df = pd.read_csv('Datasets.csv', encoding='latin-1')
+            val = predict_side_effect(uid, Drug_Name, Condition1)
             
-            def apply_results(Rating):
-                if int(Rating) <= 7:
-                    return 0
-                else:
-                    return 1
-            
-            df['Results'] = df['Rating'].apply(apply_results)
-            
-            X = df['UID'].apply(str)
-            y = df['Results']
-            
-            cv = CountVectorizer()
-            X = cv.fit_transform(X)
-            
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
-            
-            models = []
-            
-            mlpc = MLPClassifier(max_iter=1000, random_state=42).fit(X_train, y_train)
-            models.append(('MLPClassifier', mlpc))
-            
-            lin_clf = svm.LinearSVC(max_iter=1000, random_state=42)
-            lin_clf.fit(X_train, y_train)
-            models.append(('svm', lin_clf))
-            
-            reg = LogisticRegression(random_state=42, solver='lbfgs', max_iter=1000).fit(X_train, y_train)
-            models.append(('logistic', reg))
-            
-            classifier = VotingClassifier(models)
-            classifier.fit(X_train, y_train)
-            
-            predict_text = cv.transform([str(uid)])
-            y_pred = classifier.predict(predict_text)
-            
-            prediction = int(y_pred[0])
-            
-            if prediction == 0:
-                val = 'Low Side Effect Found'
-            else:
-                val = 'High Side Effect Found'
-            
+            if "Error" in val:
+                messages.error(request, val)
+                return render(request, 'RUser/Predict_Drug_Side_Effect_Type.html')
+
             drug_side_effect_prediction.objects.create(
                 uid=uid,
                 Drug_Name=Drug_Name,
