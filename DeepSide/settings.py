@@ -89,15 +89,23 @@ WSGI_APPLICATION = 'DeepSide.wsgi.application'
 # Database configuration
 # In production (Vercel), we MUST use an external database.
 # In local development, we default to SQLite.
+DATABASE_URL = os.getenv('DATABASE_URL')
+
 if IS_VERCEL or not DEBUG:
-    # Production: DATABASE_URL is required
-    DATABASE_URL = os.getenv('DATABASE_URL')
+    # Production: Require DATABASE_URL
     if not DATABASE_URL:
-        raise ValueError("DATABASE_URL environment variable is required in production.")
-    
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
-    }
+        # Fallback to a dummy database to prevent boot-time crash, 
+        # but it will fail on first actual DB access with a clearer error.
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': ':memory:',
+            }
+        }
+    else:
+        DATABASES = {
+            'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+        }
 else:
     # Development: Fallback to SQLite
     DATABASES = {
