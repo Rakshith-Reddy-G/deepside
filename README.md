@@ -69,11 +69,12 @@ This project is configured for easy deployment.
 - **Static Files:** Managed via WhiteNoise.
 - **Database:** Environment-based configuration via `DATABASE_URL`.
 
-To deploy on Render/Railway:
-1. Connect your repository.
+To deploy on Vercel:
+1. Connect your repository to Vercel.
 2. Set up the Environment Variables from `.env.example`.
-3. Build Command: `pip install -r requirements.txt && python ml/train.py && python manage.py migrate && python manage.py collectstatic --noinput`
-4. Start Command: `gunicorn DeepSide.wsgi:application`
+3. **Crucial:** You MUST provide a `DATABASE_URL` for a remote PostgreSQL database. Vercel's filesystem is read-only, so SQLite will not work for writes (like user registration).
+4. Build Command: `pip install -r requirements.txt && python ml/train.py && python manage.py collectstatic --noinput`
+5. Start Command: The `vercel.json` handles the routing to `DeepSide/wsgi.py`.
 
 ## 📂 Project Structure
 - `DeepSide/`: Main project settings and configuration.
